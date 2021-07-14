@@ -1,7 +1,7 @@
 make clean
 make
 
-algos=0         #test0
+algos=1         #test0 Exhaustive Search1
 population=100
 RUN=./bin/main
 

@@ -1,16 +1,22 @@
-# Onemax
+# Onemax Problem
 Onemax problem
 
-This project is for solving one-max problem.
-Exerting to clarify the code and making the structure to be clear and strong.
-If you have any suggestion, feel free to contact me.
-Thx! Have fun.
+This project is for solving <font color=red>one-max problem</font>.  
+Exerting to clarify the code and making the structure to be clear and strong.  
+If you have any suggestion, feel free to contact me.  
+Thx! Have fun.  
 
-Btw, this is the only public project, so if you are interested in other projects, send me correspondence.
+Btw, this is the only public project, so if you are interested in other projects, send me correspondence.  
+
+--  
+To <font color=red>execute</font> the code  
+RUN Name_of_algo Number_of_population  
 
 --
-To execute the code
-RUN Name_of_algo Number_of_population
+<font color=red>Exhaustive Search (1)</font>  
+Trying to search the possible answers as many as possible.  
+Pros : No missing any possible solution.
+Cons : Wasting the computing capability. If possible solutions are unlimited, couldn't find the best answer anyway.  
 
-Best,
+Best,  
 Henry Chuang

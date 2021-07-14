@@ -27,3 +27,7 @@ ${DIR_OBJ}/%.o: %.cpp
 
 clean:
 	find ${DIR_OBJ} -name *.o -exec rm -rf {} \;
+
+cleanall:
+	find ${DIR_OBJ} -name *.o -exec rm -rf {} \;
+	find ${DIR_RSL} -name "*.*" -exec rm -rf {} \;

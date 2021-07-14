@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Results
+result
+obj

@@ -29,6 +29,9 @@ typedef vector<string> v1s ;
 typedef vector<v1s> v2s    ;
 
 // global functions
+void see_popvec(v1i pop_vec);
+void evaluation(int& c_one, v1i pop_vec);
+void w_file(string algo, int best);
 
 // global class
 
