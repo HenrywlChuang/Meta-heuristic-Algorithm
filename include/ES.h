@@ -11,7 +11,7 @@ class ES
   public:
     ES(
         int name_algo,
-        int num_population,
+        int num_bit,
         int num_evaluation,
         int num_run
     );
@@ -22,13 +22,13 @@ class ES
   private://parameters
   
     int name_algo;
-    int num_population;
+    int num_bit;
     int num_evaluation;
     int num_run;
 
     v1i population_vec;
-    int global_one;  // how many one in the vector
-    int current_best;
+    int current_one;  // how many one in the vector
+    int global_best;
     string way_method;
 
     v1d average_best;

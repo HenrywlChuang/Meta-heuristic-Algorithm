@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 {
 
     int name_algo       = atoi(argv[1]);
-    int num_population  = atoi(argv[2]);
+    int num_bit         = atoi(argv[2]);
     int num_evaluation  = atoi(argv[3]);
     int num_run         = atoi(argv[4]);
 
@@ -26,17 +26,17 @@ int main(int argc, char** argv)
 
     if(name_algo == 0)
     {   
-        testfile testfile(name_algo, num_population);
+        testfile testfile(name_algo, num_bit);
         testfile.main();
     }
     else if(name_algo == 1)
     {   
-        ES ES(name_algo, num_population, num_evaluation, num_run);
+        ES ES(name_algo, num_bit, num_evaluation, num_run);
         ES.main();
     }
     else if(name_algo == 2)
     {   
-        HC HC(name_algo, num_population, num_evaluation, num_run);
+        HC HC(name_algo, num_bit, num_evaluation, num_run);
         HC.main();
     }
     else if(name_algo == 10)

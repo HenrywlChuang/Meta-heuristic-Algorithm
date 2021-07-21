@@ -11,7 +11,7 @@ class testfile
   public:
     testfile(
         int name_algo,
-        int num_population
+        int num_bit
     );
     ~testfile() {}
     
@@ -20,7 +20,7 @@ class testfile
   private://parameters
   
     int name_algo;
-    int num_population;
+    int num_bit;
 
   private://functions
 

@@ -11,7 +11,7 @@ class HC
   public:
     HC(
         int name_algo,
-        int num_population,
+        int num_bit,
         int num_evaluation,
         int num_run
     );
@@ -22,7 +22,7 @@ class HC
   private://parameters
   
     int name_algo;
-    int num_population;
+    int num_bit;
     int num_evaluation;
     int num_run;
 
@@ -38,6 +38,6 @@ class HC
 
   private://functions
 
-    void transition();
+    void transition(v1i& temp_population_vec);
 };
 #endif

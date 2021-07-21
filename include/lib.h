@@ -32,8 +32,8 @@ typedef vector<v1s> v2s    ;
 void see_population_vec(v1i population_vec);
 void evaluation(int& current_one, v1i population_vec);
 void write_best_file(string name_algo, int global_best);
-void initialization(v1i& population_vec, int num_population);
-void comparison(int& current_one, int& global_best);
+void initialization(v1i& population_vec, int num_bit);
+void determination(int& current_one, int& global_best, v1i temp_population_vec, v1i& population_vec);
 void write_average_file(string name_algo, v1d average_best, int num_run);
 
 // global class

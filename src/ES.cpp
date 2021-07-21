@@ -3,10 +3,10 @@
 
 using namespace std;
 
-ES::ES(int name_algo, int num_population, int num_evaluation, int num_run)
+ES::ES(int name_algo, int num_bit, int num_evaluation, int num_run)
         :
         name_algo(name_algo),
-        num_population(num_population),
+        num_bit(num_bit),
         num_evaluation(num_evaluation),
         num_run(num_run)
 {
@@ -17,8 +17,8 @@ void ES::main()
 {
     cout << "---------------------"                      << endl;
     cout << "This is the Exhaustive Search."             << endl;
-    cout << "Algo : "               << name_algo              << endl;
-    cout << "Population : "         << num_population        << endl;
+    cout << "Algo : "               << name_algo         << endl;
+    cout << "Population : "         << num_bit           << endl;
     cout << "Evaluation : "         << num_evaluation    << endl;
     way_method = "ES";
 
@@ -29,18 +29,19 @@ void ES::main()
         cout << "RUN : " << (i + 1) << endl;
         int current_evaluation = 0;
         // initializtion
-        initialization(population_vec, num_population);
-        current_best = 0;
-        // see_population_vec(population_vec);
-        evaluation(global_one, population_vec);
-        // cout << "START FROM number of bit : " << global_one << endl;
+        initialization(population_vec, num_bit);
+        global_best = 0;
+        see_population_vec(population_vec);
+        evaluation(current_one, population_vec);
+        cout << "START FROM number of bit : " << current_one << endl;
         // clock_t begin = clock();
-       while(current_evaluation < num_evaluation)
+        // while(1) // For exhaustive
+        while(current_evaluation < num_evaluation)   // For limited times
         {
+            v1i temp_population_vec = population_vec;
             transition();   // ES
-            evaluation(global_one, population_vec);
-            comparison(global_one, current_best);
-
+            evaluation(current_one, population_vec);
+            determination(current_one, global_best, temp_population_vec, population_vec);
             // check time
             // clock_t end = clock();
             // searching_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -48,17 +49,17 @@ void ES::main()
             // {
             //     cout << "TIME'S UP." << endl;
             //     cout << "The current one." << endl;
-            //     see_population_vec(population_vec);
+                see_population_vec(population_vec);
             //     break;
             // }  
-            average_best[current_evaluation] += current_best; 
+            average_best[current_evaluation] += global_best; 
             current_evaluation++;
-            if(current_best == num_population)    break;
+            if(global_best == num_bit)    break;
         }
-        for(int j = current_evaluation; j < num_evaluation; j++)    average_best[j] += current_best; 
+        for(int j = current_evaluation; j < num_evaluation; j++)    average_best[j] += global_best; 
 
         // write into a file
-        // write_best_file("ES", current_best);
+        // write_best_file("ES", global_best);
     }
 
     // write average into a file
