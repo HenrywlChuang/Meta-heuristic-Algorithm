@@ -3,19 +3,19 @@
 
 using namespace std;
 
-testfile::testfile(int algo, int population)
+testfile::testfile(int name_algo, int num_population)
         :
-        algo(algo),
-        population(population)
+        name_algo(name_algo),
+        num_population(num_population)
 {
         srand(time(0));
 }
 
-void testfile::algorithm()
+void testfile::main()
 {
-    cout << "---------------------"                 << endl;
-    cout << "This is the Testfile."                 << endl;
-    cout << "Algo : "               << algo         << endl;
-    cout << "Population : "         << population   << endl;
+    cout << "---------------------"                     << endl;
+    cout << "This is the Testfile."                     << endl;
+    cout << "Algo : "               << name_algo        << endl;
+    cout << "Population : "         << num_population   << endl;
 
 }

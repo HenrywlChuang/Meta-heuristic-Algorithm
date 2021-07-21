@@ -1,29 +1,70 @@
 #include "lib.h"
-void see_popvec(v1i pop_vec)
+void see_population_vec(v1i population_vec)
 {
-    for(int i = 0; i < (int)pop_vec.size(); i++)    cout << pop_vec[i];
+    for(int i = 0; i < (int)population_vec.size(); i++)    cout << population_vec[i];
     cout << endl;
 }
 
-void evaluation(int& c_one, v1i pop_vec)
+void evaluation(int& current_one, v1i population_vec)
 {
-    c_one = 0;
-    for(int i = 0; i < (int)pop_vec.size(); i++)    if(pop_vec[i] == 1) c_one++;
+    current_one = 0;
+    for(int i = 0; i < (int)population_vec.size(); i++)    if(population_vec[i] == 1) current_one++;
 }
 
-void w_file(string algo, int best)
+void write_best_file(string name_algo, int global_best)
 {
     fstream file;
     string filename;
-    filename = "result/" + algo + ".txt";
-    file.open(filename,  ios::out | ios::trunc);    // ios::app // open the existed one, not remove it
+    filename = "result/txt/" + name_algo + ".txt";
+    file.open(filename,  ios::out | ios::app);    // ios::app // open the existed one, not remove it    // ios::trunc   // remove the same name file, rewrite it again
     if(file.fail()) cout << "open failed" << endl;
     else
     {
-        file << "---" << endl;
-        file << "The maximum number of bit : " << best << endl;
+        // file << "---" << endl;
+        file << "### The maximum number of bit : " << global_best << " ###" <<endl;
     }    
 
     file << "---" << endl;
     file.close();
+    cout << "---DONE Writing.---" << endl;
+}
+
+void write_average_file(string name_algo, v1d average_best, int num_run)
+{
+    fstream file;
+    string filename;
+    filename = "result/txt/" + name_algo + ".txt";
+    file.open(filename,  ios::out | ios::app);    // ios::app // open the existed one, not remove it    // ios::trunc   // remove the same name file, rewrite it again
+    if(file.fail()) cout << "open failed" << endl;
+    else
+    {
+        // file << "---" << endl;
+        file << "### The average number of bit in each evaluation ###" << endl;
+		for(int i = 0; i < (int)average_best.size(); i++)	file << average_best[i] / num_run << endl;
+    }    
+
+    file << "---" << endl;
+    file.close();
+    cout << "---DONE Writing.---" << endl;
+}
+
+void initialization(v1i& population_vec, int num_population)
+{
+    population_vec.assign(num_population, 0);   // initial from all 0
+    for(int i = 0; i < num_population; i++)    population_vec[i] = rand() % 2;		// initial by random
+}
+
+void comparison(int& current_one, int& global_best)
+{
+    // compare
+	if(current_one > global_best)
+	{
+		global_best = current_one;
+		// clock_t end = clock();
+		// see_population_vec(population_vec);
+		// searching_secs = double(end - begin) / CLOCKS_PER_SEC;
+		// cout << current_one << endl;
+		// cout << global_best << endl;
+		// cout << searching_secs << " sec." << endl;
+	}
 }

@@ -10,17 +10,17 @@ class testfile
 {
   public:
     testfile(
-        int algo,
-        int population
+        int name_algo,
+        int num_population
     );
     ~testfile() {}
     
-    void algorithm();
+    void main();
   
   private://parameters
   
-    int algo;
-    int population;
+    int name_algo;
+    int num_population;
 
   private://functions
 

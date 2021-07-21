@@ -29,9 +29,12 @@ typedef vector<string> v1s ;
 typedef vector<v1s> v2s    ;
 
 // global functions
-void see_popvec(v1i pop_vec);
-void evaluation(int& c_one, v1i pop_vec);
-void w_file(string algo, int best);
+void see_population_vec(v1i population_vec);
+void evaluation(int& current_one, v1i population_vec);
+void write_best_file(string name_algo, int global_best);
+void initialization(v1i& population_vec, int num_population);
+void comparison(int& current_one, int& global_best);
+void write_average_file(string name_algo, v1d average_best, int num_run);
 
 // global class
 
