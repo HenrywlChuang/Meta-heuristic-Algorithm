@@ -1,14 +1,37 @@
 #include "lib.h"
-void see_population_vec(v1i population_vec)
+void see_solution_vec(v1i solution_vec)
 {
-    for(int i = 0; i < (int)population_vec.size(); i++)    cout << population_vec[i];
+    for(int i = 0; i < (int)solution_vec.size(); i++)    cout << solution_vec[i];
     cout << endl;
 }
 
-void evaluation(int& current_one, v1i temp_population_vec)
+int binary_to_decimal(v1i temp_solution_vec)
 {
-    current_one = 0;
-    for(int i = 0; i < (int)temp_population_vec.size(); i++)    if(temp_population_vec[i] == 1) current_one++;
+    int count = 0;  // decimal
+    int solution_index = 0; // index of solution
+    // cout << "---" << endl;
+    // see_solution_vec(temp_solution_vec);
+    for(int i = temp_solution_vec.size() - 1; i>= 0; i--)
+    {
+        count += temp_solution_vec[i] * pow(2, solution_index);
+        solution_index++;
+    }
+    // cout << "Count : " << count << endl;
+    return count;
+}
+
+void evaluation(int& current_fitness, v1i temp_solution_vec)
+{
+    current_fitness = 0;
+    for(int i = 0; i < (int)temp_solution_vec.size(); i++)    if(temp_solution_vec[i] == 1) current_fitness++;
+}
+
+void evaluation_decption(int& current_fitness, v1i temp_solution_vec)
+{
+    current_fitness = 0;
+    current_fitness = fabs(binary_to_decimal(temp_solution_vec) - pow(2, (temp_solution_vec.size() - 2)));
+    // see_solution_vec(temp_solution_vec);
+    // cout << current_fitness << endl; // check current_fitness
 }
 
 void write_best_file(string name_algo, int global_best)
@@ -48,24 +71,30 @@ void write_average_file(string name_algo, v1d average_best, int num_run)
     cout << "---DONE Writing.---" << endl;
 }
 
-void initialization(v1i& population_vec, int num_bit)
+void initialization(v1i& solution_vec, int num_bit)
 {
-    population_vec.assign(num_bit, 0);   // initial from all 0
-    for(int i = 0; i < num_bit; i++)    population_vec[i] = rand() % 2;		// initial by random
+    solution_vec.assign(num_bit, 0);   // initial from all 0
+    for(int i = 0; i < num_bit; i++)    solution_vec[i] = rand() % 2;		// initial by random
 }
 
-void determination(int& current_one, int& global_best, v1i temp_population_vec, v1i& population_vec)
+void determination(int& current_fitness, int& best_so_far, v1i temp_solution_vec, v1i& solution_vec)
 {
     // compare
-	if(current_one > global_best)
+	if(current_fitness > best_so_far)
 	{
-		global_best = current_one;
-        population_vec = temp_population_vec;
+		best_so_far = current_fitness;
+        solution_vec = temp_solution_vec;
 		// clock_t end = clock();
-		// see_population_vec(population_vec);
+		// see_solution_vec(solution_vec);
 		// searching_secs = double(end - begin) / CLOCKS_PER_SEC;
-		// cout << current_one << endl;
-		cout << global_best << endl;
+		// cout << current_fitness << endl;
+        // cout << "yooooooo----" << endl;
+		// cout << best_so_far << endl;
 		// cout << searching_secs << " sec." << endl;
 	}
+}
+
+void save_global_best(int& global_best, int& lastest_best)
+{
+    if(lastest_best >= global_best) global_best = lastest_best;
 }

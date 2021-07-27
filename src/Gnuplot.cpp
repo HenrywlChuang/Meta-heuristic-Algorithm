@@ -17,8 +17,22 @@ void Gnuplot::main()
     cout << "Please name the name of figure."        << endl;
     getline(cin, input_filename);
     fstream file;
-    string filename = "result/gp/" + input_filename + ".gp";
-    file.open(filename,  ios::out | ios::app);    // ios::app // open the existed one, not remove it    // ios::trunc   // remove the same name file, rewrite it again
+    string sh_filename = "Gnuplot.sh";    // for sh file
+    file.open(sh_filename,  ios::out | ios::trunc);    // ios::app // open the existed one, not remove it    // ios::trunc   // remove the same name file, rewrite it again
+    if(!file)
+    {
+        cout << "Cannot open file." << endl;
+    }
+    else
+    {
+        cout << "Opened file." << endl;
+        file << "main=gnuplot" << endl;
+        file << "filename=" + input_filename << endl;;
+        file << "$main result/gp/$filename.gp" << endl;
+    }
+    file.close(); 
+    string gp_filename = "result/gp/" + input_filename + ".gp";    // for gp file
+    file.open(gp_filename,  ios::out | ios::trunc);    // ios::app // open the existed one, not remove it    // ios::trunc   // remove the same name file, rewrite it again
     if(!file)
     {
         cout << "Cannot open file." << endl;

@@ -1,23 +1,24 @@
-#ifndef __ES_H_INCLUDED__
-#define __ES_H_INCLUDED__
+#ifndef __SA_H_INCLUDED__
+#define __SA_H_INCLUDED__
 
 #include <iostream>
 #include "lib.h"
 
 using namespace std;
 
-class ES
+class SA
 {
   public:
-    ES(
+    SA(
         int name_algo,
         int num_bit,
         int num_evaluation,
         int num_run
     );
-    ~ES() {}
+    ~SA() {}
     
     void onemax();
+    void deception();
   
   private://parameters
   
@@ -30,6 +31,7 @@ class ES
     int current_fitness;  // how many one in the vector
     int global_best;
     string way_method;
+    double initial_temperature;
 
     v1d average_best;
 
@@ -38,6 +40,6 @@ class ES
 
   private://functions
 
-    void transition();
+    void transition(v1i& temp_solution_vec);
 };
 #endif

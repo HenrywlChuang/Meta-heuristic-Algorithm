@@ -31,3 +31,4 @@ clean:
 cleanall:
 	find ${DIR_OBJ} -name *.o -exec rm -rf {} \;
 	find ${DIR_RSL} -name "*.*" -exec rm -rf {} \;
+	rm -rf Gnuplot.sh;

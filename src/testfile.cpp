@@ -16,6 +16,6 @@ void testfile::main()
     cout << "---------------------"                     << endl;
     cout << "This is the Testfile."                     << endl;
     cout << "Algo : "               << name_algo        << endl;
-    cout << "Population : "         << num_bit          << endl;
+    cout << "Bits : "               << num_bit          << endl;
 
 }

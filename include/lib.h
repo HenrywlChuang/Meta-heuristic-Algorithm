@@ -29,12 +29,15 @@ typedef vector<string> v1s ;
 typedef vector<v1s> v2s    ;
 
 // global functions
-void see_population_vec(v1i population_vec);
-void evaluation(int& current_one, v1i population_vec);
+void see_solution_vec(v1i solution_vec);
+void evaluation_decption(int& current_fitness, v1i temp_solution_vec);
+void evaluation(int& current_fitness, v1i solution_vec);
 void write_best_file(string name_algo, int global_best);
-void initialization(v1i& population_vec, int num_bit);
-void determination(int& current_one, int& global_best, v1i temp_population_vec, v1i& population_vec);
+void initialization(v1i& solution_vec, int num_bit);
+void determination(int& current_fitness, int& best_so_far, v1i temp_solution_vec, v1i& solution_vec);
 void write_average_file(string name_algo, v1d average_best, int num_run);
+void save_global_best(int& global_best, int& lastest_best);
+int binary_to_decimal(v1i temp_solution_vec);
 
 // global class
 

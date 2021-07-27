@@ -13,12 +13,12 @@ ES::ES(int name_algo, int num_bit, int num_evaluation, int num_run)
         srand(time(0));
 }
 
-void ES::main()
+void ES::onemax()
 {
     cout << "---------------------"                      << endl;
     cout << "This is the Exhaustive Search."             << endl;
     cout << "Algo : "               << name_algo         << endl;
-    cout << "Population : "         << num_bit           << endl;
+    cout << "Bits : "               << num_bit           << endl;
     cout << "Evaluation : "         << num_evaluation    << endl;
     way_method = "ES";
 
@@ -29,19 +29,19 @@ void ES::main()
         cout << "RUN : " << (i + 1) << endl;
         int current_evaluation = 0;
         // initializtion
-        initialization(population_vec, num_bit);
-        global_best = 0;
-        see_population_vec(population_vec);
-        evaluation(current_one, population_vec);
-        cout << "START FROM number of bit : " << current_one << endl;
+        initialization(solution_vec, num_bit);
+        // see_solution_vec(solution_vec);
+        evaluation(current_fitness, solution_vec);
+        global_best = current_fitness;
+        // cout << "START FROM number of bit : " << current_fitness << endl;
         // clock_t begin = clock();
         // while(1) // For exhaustive
         while(current_evaluation < num_evaluation)   // For limited times
         {
-            v1i temp_population_vec = population_vec;
+            v1i temp_solution_vec = solution_vec;
             transition();   // ES
-            evaluation(current_one, population_vec);
-            determination(current_one, global_best, temp_population_vec, population_vec);
+            evaluation(current_fitness, solution_vec);
+            determination(current_fitness, global_best, temp_solution_vec, solution_vec);
             // check time
             // clock_t end = clock();
             // searching_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -49,7 +49,7 @@ void ES::main()
             // {
             //     cout << "TIME'S UP." << endl;
             //     cout << "The current one." << endl;
-                see_population_vec(population_vec);
+            //     see_solution_vec(solution_vec);
             //     break;
             // }  
             average_best[current_evaluation] += global_best; 
@@ -69,13 +69,13 @@ void ES::main()
 
 void ES::transition()
 {
-    for(int i = population_vec.size() - 1; i >= 0; i--)
+    for(int i = solution_vec.size() - 1; i >= 0; i--)
     {
-        if(population_vec[i] == 0)
+        if(solution_vec[i] == 0)
         {
-            population_vec[i] = 1;
+            solution_vec[i] = 1;
             break;
         }
-        else    population_vec[i] = 0;
+        else    solution_vec[i] = 0;
     }
 }

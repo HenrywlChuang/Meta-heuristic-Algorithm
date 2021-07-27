@@ -9,6 +9,7 @@
 #include <testfile.h>
 #include <ES.h>
 #include <HC.h>
+#include <SA.h>
 #include <Gnuplot.h>
 #include <lib.h> 
 
@@ -32,12 +33,18 @@ int main(int argc, char** argv)
     else if(name_algo == 1)
     {   
         ES ES(name_algo, num_bit, num_evaluation, num_run);
-        ES.main();
+        ES.onemax();
     }
     else if(name_algo == 2)
     {   
         HC HC(name_algo, num_bit, num_evaluation, num_run);
-        HC.main();
+        HC.onemax();
+    }
+    else if(name_algo == 3)
+    {   
+        SA SA(name_algo, num_bit, num_evaluation, num_run);
+        // SA.onemax();
+        SA.deception();
     }
     else if(name_algo == 10)
     {   

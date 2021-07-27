@@ -13,14 +13,14 @@ HC::HC(int name_algo, int num_bit, int num_evaluation, int num_run)
         srand(time(0));
 }
 
-void HC::main()
+void HC::onemax()
 {
     cout << "---------------------"                      << endl;
     cout << "This is the Hill Climbing."                 << endl;
     cout << "Algo : "               << name_algo         << endl;
-    cout << "Population : "         << num_bit           << endl;
+    cout << "Bits : "               << num_bit           << endl;
     cout << "Evaluation : "         << num_evaluation    << endl;
-    way_method = "HC_rand"; // HC_rand or HC_left_right
+    way_method = "HC_left_right"; // HC_rand or HC_left_right
 
     average_best.assign(num_evaluation, 0);
     // start
@@ -29,19 +29,19 @@ void HC::main()
         cout << "RUN : " << (i + 1) << endl;
         int current_evaluation = 0;
         // initialization
-        initialization(population_vec, num_bit);
-        global_best = 0;
-        // see_population_vec(population_vec);
-        evaluation(current_one, population_vec);
-        // cout << "START FROM number of bit : " << current_one << endl;
+        initialization(solution_vec, num_bit);
+        // see_solution_vec(solution_vec);
+        evaluation(current_fitness, solution_vec);
+        global_best = current_fitness;
+        // cout << "START FROM number of bit : " << current_fitness << endl;
 
         // HC
         while(current_evaluation < num_evaluation)
         {
-            v1i temp_population_vec = population_vec;
-            transition(temp_population_vec);   // HC
-            evaluation(current_one, temp_population_vec);
-            determination(current_one, global_best, temp_population_vec, population_vec);
+            v1i temp_solution_vec = solution_vec;
+            transition(temp_solution_vec);   // HC
+            evaluation(current_fitness, temp_solution_vec);
+            determination(current_fitness, global_best, temp_solution_vec, solution_vec);
             average_best[current_evaluation] += global_best;
             current_evaluation++;
         }
@@ -53,20 +53,20 @@ void HC::main()
     cout << "---DONE HC.---" << endl;
 }
 
-void HC::transition(v1i& temp_population_vec)
+void HC::transition(v1i& temp_solution_vec)
 {
     // random method
     if(way_method.compare("HC_rand"))
     {
         int pick_random = rand() % num_bit;  // randomly pick a position to be changed
-        if(temp_population_vec[pick_random] == 0)   temp_population_vec[pick_random] = 1;
-        else temp_population_vec[pick_random] = 0;
+        if(temp_solution_vec[pick_random] == 0)   temp_solution_vec[pick_random] = 1;
+        else temp_solution_vec[pick_random] = 0;
     }
     // left-right method
     else if(way_method.compare("HC_left_right"))
     {
-        if(temp_population_vec[temp_population_vec.size() - 1] == 0)    temp_population_vec[temp_population_vec.size() - 1] = 1;
-        else    temp_population_vec[temp_population_vec.size() - 1] = 0;
+        if(temp_solution_vec[temp_solution_vec.size() - 1] == 0)    temp_solution_vec[temp_solution_vec.size() - 1] = 1;
+        else    temp_solution_vec[temp_solution_vec.size() - 1] = 0;
     }
     else
     {

@@ -17,7 +17,7 @@ class HC
     );
     ~HC() {}
     
-    void main();
+    void onemax();
   
   private://parameters
   
@@ -26,8 +26,8 @@ class HC
     int num_evaluation;
     int num_run;
 
-    v1i population_vec;
-    int current_one;  // how many one in the vector
+    v1i solution_vec;
+    int current_fitness;  // how many one in the vector
     int global_best;
     string way_method;
 
@@ -38,6 +38,6 @@ class HC
 
   private://functions
 
-    void transition(v1i& temp_population_vec);
+    void transition(v1i& temp_solution_vec);
 };
 #endif

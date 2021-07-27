@@ -1,4 +1,5 @@
-make clean
+# Execute this to run the program
+# Plotting figures, please using Plot.sh
 make
 
 algos=1         #test(0) Exhaustive Search(1) Hill Climbing(2) Plotting (10)
