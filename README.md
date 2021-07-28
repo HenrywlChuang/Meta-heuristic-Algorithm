@@ -1,9 +1,10 @@
-# Onemax Problem
+# Heuristic Algorithm & Meta-heuristic Algorithm
 
-## Onemax problem
+## **Abstract**
 
-This project is for solving one-max problem.  
-Exerting to clarify the code and making the structure to be clear and strong.  
+This project is coding for fun.  
+My goal is exerting to clarify the code and making the structure to be clear and strong.  
+I also want to learn the OOP concept.  
 If you have any suggestion, feel free to contact me.  
 Thx! Have fun.  
 
@@ -18,12 +19,36 @@ To **execute** the code
 
 ## **Fast link**
 
-- [Exhaustive Search](#Exhaustive-Search-(1))
-- [Hill Climbing](#Hill-Climbing-(2))
-- [Simulated Annealing](#Simulated-Annealing-(3))
-- [Signature](#Best,)
+- [Abstract](#abstract)
+- [Problems](#problems)
+  - [Onemax](#onemax-problem)
+  - [Deception](#deception-problem)
+- [Algorithms](#algorithms)
+  - [Exhaustive Search](#exhaustive-search-1)
+  - [Hill Climbing](#hill-climbing-2)
+  - [Simulated Annealing](#simulated-annealing-3)
+- [Signature](#best)
 
 -----
+
+## **Problems**
+
+### **Onemax problem**
+
+- Def : There is a vector that saves "0" or "1". The length of the vactor is defined by user.  
+- Goal : The goal of onemax problem is to find **"1"** as many as possible in the vector.
+
+-----
+
+### **Deception problem**
+
+- Def : A function which is difined as **$f(x_{bin}) = |x_{dec} - 2 ^ {(n - 2)}|$**  
+The $x$ means a vector that has been input. The $x_{bin}$ means $x$ using binary to show. The $x_{dec}$ means $x$ using decimal to show. The $n$ means the length of $x_{bin}$.  
+- Goal : The goal is making the function result as huge as possible.
+
+-----
+
+## **Algorithms**
 
 ### **Exhaustive Search (1)**  
 
@@ -60,7 +85,7 @@ Giving some probabilities to accept worse solution for searching other possible 
   - There are two ways of transition. One is randonmly pick a position to change,
 and another one is only check the left or right position based on decimal.  
   - The initial temperature is set to 100 or by user input. Temperature will decrease by every iteration.  
-  - The anneal energy is calculated by *exp((current_fitness - lastest_fitness) / current_temperature)*
+  - The anneal energy is calculated by **exp((current_fitness - lastest_fitness) / current_temperature)**
   
 ### ***Best,***  
 

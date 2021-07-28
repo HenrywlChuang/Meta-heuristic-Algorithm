@@ -34,16 +34,18 @@ int main(int argc, char** argv)
     {   
         ES ES(name_algo, num_bit, num_evaluation, num_run);
         ES.onemax();
+        ES.deception();
     }
     else if(name_algo == 2)
     {   
         HC HC(name_algo, num_bit, num_evaluation, num_run);
         HC.onemax();
+        HC.deception();
     }
     else if(name_algo == 3)
     {   
         SA SA(name_algo, num_bit, num_evaluation, num_run);
-        // SA.onemax();
+        SA.onemax();
         SA.deception();
     }
     else if(name_algo == 10)

@@ -18,6 +18,7 @@ class HC
     ~HC() {}
     
     void onemax();
+    void deception();
   
   private://parameters
   

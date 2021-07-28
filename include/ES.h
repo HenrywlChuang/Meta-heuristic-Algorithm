@@ -18,6 +18,7 @@ class ES
     ~ES() {}
     
     void onemax();
+    void deception();
   
   private://parameters
   

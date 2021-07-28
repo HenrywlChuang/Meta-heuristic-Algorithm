@@ -20,7 +20,7 @@ void SA::deception()
     cout << "Algo : "               << name_algo            << endl;
     cout << "Bits : "               << num_bit              << endl;
     cout << "Evaluation : "         << num_evaluation       << endl;
-    way_method = "SA_deception_left_right"; // SA_deception_rand or SA_deception_left_right
+    way_method = "SA_rand"; // SA_rand or SA_left_right
 
     /// set by self or from outside
     // cout << "Please input initial temperature"              << endl;
@@ -84,7 +84,7 @@ void SA::onemax()
     cout << "Algo : "               << name_algo            << endl;
     cout << "Bits : "               << num_bit              << endl;
     cout << "Evaluation : "         << num_evaluation       << endl;
-    way_method = "SA_onemax_rand"; // SA_onemax_rand or SA_onemax_left_right
+    way_method = "SA_left_right"; // SA_rand or SA_left_right
 
     /// set by self or from outside
     // cout << "Please input initial temperature"              << endl;

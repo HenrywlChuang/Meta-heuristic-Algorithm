@@ -44,7 +44,7 @@ void Gnuplot::main()
         file << "set output '";
         file << "result/graph/" + input_filename + ".png'" << endl;
         file << "set xlabel \"Evaluation\"" << endl;
-        file << "set ylabel \"Number of bit\"" << endl;
+        file << "set ylabel \"Fitness\"" << endl;
         file << "set title \"" + input_filename + "\"" << endl;
         file << "set grid" << endl;
         file << "set term png enhanced font 'Verdana,10'" << endl;
