@@ -22,6 +22,7 @@ int main(int argc, char** argv)
     int num_bit         = atoi(argv[2]);
     int num_evaluation  = atoi(argv[3]);
     int num_run         = atoi(argv[4]);
+    int name_function   = atoi(argv[5]);
 
     clock_t begin = clock();
 
@@ -32,21 +33,18 @@ int main(int argc, char** argv)
     }
     else if(name_algo == 1)
     {   
-        ES ES(name_algo, num_bit, num_evaluation, num_run);
-        ES.onemax();
-        ES.deception();
+        ES ES(name_algo, num_bit, num_evaluation, num_run, name_function);
+        ES.main();
     }
     else if(name_algo == 2)
     {   
-        HC HC(name_algo, num_bit, num_evaluation, num_run);
-        HC.onemax();
-        HC.deception();
+        HC HC(name_algo, num_bit, num_evaluation, num_run, name_function);
+        HC.main();
     }
     else if(name_algo == 3)
     {   
-        SA SA(name_algo, num_bit, num_evaluation, num_run);
-        SA.onemax();
-        SA.deception();
+        SA SA(name_algo, num_bit, num_evaluation, num_run, name_function);
+        SA.main();
     }
     else if(name_algo == 10)
     {   

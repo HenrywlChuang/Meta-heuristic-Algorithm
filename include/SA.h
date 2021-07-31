@@ -6,40 +6,23 @@
 
 using namespace std;
 
-class SA
+class SA : public Algo
 {
   public:
-    SA(
-        int name_algo,
-        int num_bit,
-        int num_evaluation,
-        int num_run
-    );
-    ~SA() {}
-    
-    void onemax();
-    void deception();
-  
-  private://parameters
-  
-    int name_algo;
-    int num_bit;
-    int num_evaluation;
-    int num_run;
+	SA(
+		int name_algo,
+		int num_bit,
+		int num_evaluation,
+		int num_run,
+		int function);
+	~SA() {}
 
-    v1i solution_vec;
-    int current_fitness;  // how many one in the vector
-    int global_best;
-    string way_method;
-    double initial_temperature;
+	void main();
 
-    v1d average_best;
+  private: //parameters
+	double initial_temperature;
 
-    // measurement
-    double searching_secs;
-
-  private://functions
-
-    void transition(v1i& temp_solution_vec);
+  private: //functions
+	void transition(v1i &temp_solution_vec);
 };
 #endif

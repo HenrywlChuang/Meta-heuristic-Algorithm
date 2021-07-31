@@ -1,11 +1,20 @@
 #include "lib.h"
-void see_solution_vec(v1i solution_vec)
+// Class
+Algo::Algo(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function)
+        :
+        name_algo(name_algo), num_bit(num_bit), num_evaluation(num_evaluation), num_run(num_run), name_function(name_function)
+{
+        srand(time(0));
+}
+
+// Function
+void see_solution_vec(const v1i& solution_vec)
 {
     for(int i = 0; i < (int)solution_vec.size(); i++)    cout << solution_vec[i];
     cout << endl;
 }
 
-int binary_to_decimal(v1i temp_solution_vec)
+int binary_to_decimal(const v1i& temp_solution_vec)
 {
     int count = 0;  // decimal
     int solution_index = 0; // index of solution
@@ -20,13 +29,20 @@ int binary_to_decimal(v1i temp_solution_vec)
     return count;
 }
 
-void evaluation(int& current_fitness, v1i temp_solution_vec)
+void evaluation(int& current_fitness, const v1i& temp_solution_vec, const int& name_algo)
+{
+    if(name_algo == 0)  evaluation_onemax(current_fitness, temp_solution_vec);
+    else if(name_algo == 1) evaluation_onemax(current_fitness, temp_solution_vec);
+    else    cout << "Please check the function." << endl;
+}
+
+void evaluation_onemax(int& current_fitness, const v1i& temp_solution_vec)
 {
     current_fitness = 0;
     for(int i = 0; i < (int)temp_solution_vec.size(); i++)    if(temp_solution_vec[i] == 1) current_fitness++;
 }
 
-void evaluation_decption(int& current_fitness, v1i temp_solution_vec)
+void evaluation_decption(int& current_fitness, const v1i& temp_solution_vec)
 {
     current_fitness = 0;
     current_fitness = fabs(binary_to_decimal(temp_solution_vec) - pow(2, (temp_solution_vec.size() - 2)));
@@ -34,7 +50,7 @@ void evaluation_decption(int& current_fitness, v1i temp_solution_vec)
     // cout << current_fitness << endl; // check current_fitness
 }
 
-void write_best_file(string name_algo, int global_best)
+void write_best_file(const string& name_algo, const int& global_best)
 {
     fstream file;
     string filename;
@@ -52,7 +68,7 @@ void write_best_file(string name_algo, int global_best)
     cout << "---DONE Writing.---" << endl;
 }
 
-void write_average_file(string name_algo, v1d average_best, int num_run)
+void write_average_file(const string& name_algo, const v1d& average_best, const int& num_run)
 {
     fstream file;
     string filename;
@@ -71,13 +87,13 @@ void write_average_file(string name_algo, v1d average_best, int num_run)
     cout << "---DONE Writing.---" << endl;
 }
 
-void initialization(v1i& solution_vec, int num_bit)
+void initialization(v1i& solution_vec, const int& num_bit)
 {
     solution_vec.assign(num_bit, 0);   // initial from all 0
     for(int i = 0; i < num_bit; i++)    solution_vec[i] = rand() % 2;		// initial by random
 }
 
-void determination(int& current_fitness, int& best_so_far, v1i temp_solution_vec, v1i& solution_vec)
+void determination(int& current_fitness, int& best_so_far, const v1i& temp_solution_vec, v1i& solution_vec)
 {
     // compare
 	if(current_fitness > best_so_far)

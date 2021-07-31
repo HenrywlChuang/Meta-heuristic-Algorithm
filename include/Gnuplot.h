@@ -9,17 +9,17 @@ using namespace std;
 class Gnuplot
 {
   public:
-    Gnuplot(
-        int name_algo
-    );
-    ~Gnuplot() {}
-    
-    void main();
+	Gnuplot(
+		int name_algo
+	);
+	~Gnuplot() {}
+	
+	void main();
   
   private://parameters
 
-    int name_algo;
-    string input_filename;
+	int name_algo;
+	string input_filename;
 
   private://functions
 

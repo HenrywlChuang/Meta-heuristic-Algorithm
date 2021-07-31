@@ -3,81 +3,14 @@
 
 using namespace std;
 
-SA::SA(int name_algo, int num_bit, int num_evaluation, int num_run)
+SA::SA(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function)
         :
-        name_algo(name_algo),
-        num_bit(num_bit),
-        num_evaluation(num_evaluation),
-        num_run(num_run)
+        Algo(name_algo, num_bit, num_evaluation, num_run, name_function)
 {
         srand(time(0));
 }
 
-void SA::deception()
-{
-    cout << "---------------------"                         << endl;
-    cout << "This is the Simulated Annealing."              << endl;
-    cout << "Algo : "               << name_algo            << endl;
-    cout << "Bits : "               << num_bit              << endl;
-    cout << "Evaluation : "         << num_evaluation       << endl;
-    way_method = "SA_rand"; // SA_rand or SA_left_right
-
-    /// set by self or from outside
-    // cout << "Please input initial temperature"              << endl;
-    // if(scanf("%lf", &initial_temperature))  cout << "Initial temperature : " << initial_temperature << endl;
-    // else    cout << "Check the input." << endl;
-    initial_temperature = 100; 
-    ///
-
-    average_best.assign(num_evaluation, 0);
-    // start
-    for(int i = 0; i < num_run; i++)
-    {
-        cout << "RUN : " << (i + 1) << endl;
-        int current_evaluation = 0;
-        double temperature_run = initial_temperature;
-        // initialization
-        initialization(solution_vec, num_bit);
-        // see_solution_vec(solution_vec);
-        evaluation_decption(current_fitness, solution_vec);
-        global_best = current_fitness;
-        // cout << "START FROM number of bit : " << current_fitness << endl;
-
-        // SA
-        int lastest_best = current_fitness;
-        while(current_evaluation < num_evaluation)
-        {
-            v1i temp_solution_vec = solution_vec;
-            transition(temp_solution_vec); 
-            evaluation_decption(current_fitness, temp_solution_vec);
-            if(current_fitness > lastest_best) determination(current_fitness, lastest_best, temp_solution_vec, solution_vec);
-            else if(current_fitness == lastest_best) solution_vec = temp_solution_vec;
-            else
-            {
-                double rand_annealing_rate = (double)rand() / (RAND_MAX + 1.0);
-                double anneal_energy = exp((current_fitness - lastest_best) / temperature_run);
-                if(anneal_energy > rand_annealing_rate)
-                {
-                    lastest_best = current_fitness;
-                    solution_vec = temp_solution_vec;
-                }
-            }
-            save_global_best(global_best, lastest_best);
-
-            average_best[current_evaluation] += global_best;
-            current_evaluation++;
-            // temperature_run = initial_temperature * (double)(num_evaluation - current_evaluation) / (double)num_evaluation;  // annealing
-            temperature_run *= 0.9; // annealing
-        }
-        // write_best_file(way_method, global_best);
-    }
-
-    // write average into a file
-    write_average_file(way_method, average_best, num_run);
-    cout << "---DONE SA Deception.---" << endl;
-}
-
-void SA::onemax()
+void SA::main()
 {
     cout << "---------------------"                         << endl;
     cout << "This is the Simulated Annealing."              << endl;
@@ -103,7 +36,7 @@ void SA::onemax()
         // initialization
         initialization(solution_vec, num_bit);
         // see_solution_vec(solution_vec);
-        evaluation(current_fitness, solution_vec);
+        evaluation(current_fitness, solution_vec, name_algo);
         global_best = current_fitness;
         // cout << "START FROM number of bit : " << current_fitness << endl;
 
@@ -113,7 +46,7 @@ void SA::onemax()
         {
             v1i temp_solution_vec = solution_vec;
             transition(temp_solution_vec); 
-            evaluation(current_fitness, temp_solution_vec);
+            evaluation(current_fitness, temp_solution_vec, name_algo);
             if(current_fitness > lastest_best) determination(current_fitness, lastest_best, temp_solution_vec, solution_vec);
             else if(current_fitness == lastest_best) solution_vec = temp_solution_vec;
             else

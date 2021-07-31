@@ -9,18 +9,18 @@ using namespace std;
 class testfile
 {
   public:
-    testfile(
-        int name_algo,
-        int num_bit
-    );
-    ~testfile() {}
-    
-    void main();
+	testfile(
+		int name_algo,
+		int num_bit
+	);
+	~testfile() {}
+	
+	void main();
   
   private://parameters
   
-    int name_algo;
-    int num_bit;
+	int name_algo;
+	int num_bit;
 
   private://functions
 

@@ -6,39 +6,24 @@
 
 using namespace std;
 
-class HC
+class HC : public Algo
 {
   public:
-    HC(
-        int name_algo,
-        int num_bit,
-        int num_evaluation,
-        int num_run
-    );
-    ~HC() {}
-    
-    void onemax();
-    void deception();
+	HC(
+		int name_algo,
+		int num_bit,
+		int num_evaluation,
+		int num_run,
+		int name_function
+	);
+	~HC() {}
+	
+	void main();
   
   private://parameters
-  
-    int name_algo;
-    int num_bit;
-    int num_evaluation;
-    int num_run;
-
-    v1i solution_vec;
-    int current_fitness;  // how many one in the vector
-    int global_best;
-    string way_method;
-
-    v1d average_best;
-
-    // measurement
-    double searching_secs;
 
   private://functions
 
-    void transition(v1i& temp_solution_vec);
+	void transition(v1i& temp_solution_vec);
 };
 #endif

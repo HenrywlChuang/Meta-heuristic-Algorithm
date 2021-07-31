@@ -27,6 +27,7 @@ To **execute** the code
   - [Exhaustive Search](#exhaustive-search-1)
   - [Hill Climbing](#hill-climbing-2)
   - [Simulated Annealing](#simulated-annealing-3)
+  - [Tabu Search](#tabu-search-4)
 - [Signature](#best)
 
 -----
@@ -86,6 +87,16 @@ Giving some probabilities to accept worse solution for searching other possible 
 and another one is only check the left or right position based on decimal.  
   - The initial temperature is set to 100 or by user input. Temperature will decrease by every iteration.  
   - The anneal energy is calculated by **exp((current_fitness - lastest_fitness) / current_temperature)**
+
+-----
+
+### **Tabu Search (4)**  
+
+TS
+
+- Pros :  
+- Cons :  
+- EX :
   
 ### ***Best,***  
 

@@ -6,39 +6,18 @@
 
 using namespace std;
 
-class ES
+class ES : public Algo
 {
   public:
-    ES(
-        int name_algo,
-        int num_bit,
-        int num_evaluation,
-        int num_run
-    );
-    ~ES() {}
-    
-    void onemax();
-    void deception();
+	ES(int name_algo, int num_bit, int num_evaluation, int num_run, int num_function);
+	~ES() {}
+	
+	void main();
   
   private://parameters
-  
-    int name_algo;
-    int num_bit;
-    int num_evaluation;
-    int num_run;
-
-    v1i solution_vec;
-    int current_fitness;  // how many one in the vector
-    int global_best;
-    string way_method;
-
-    v1d average_best;
-
-    // measurement
-    double searching_secs;
 
   private://functions
 
-    void transition();
+	void transition();
 };
 #endif
