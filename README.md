@@ -2,18 +2,14 @@
 
 ## **Abstract**
 
-This project is coding for fun.  
-My goal is exerting to clarify the code and making the structure to be clear and strong.  
-I also want to learn the OOP concept.  
-If you have any suggestion, feel free to contact me.  
-Thx! Have fun.  
+This project is coding for fun. My goal is exerting to clarify the code and making the structure to be clear and strong. I also want to learn the OOP concept. If you have any suggestion, feel free to contact me. Thx! Have fun.  
 
 Btw, this is the only public project, so if you are interested in other projects, send me correspondence.  
 
 -----  
 To **execute** the code  
 
-- ***RUN*** **Name_of_algo Number_of_bit Number_of_evaluation Number_of_run**  
+- ***RUN*** **Name_of_algo Number_of_bit Number_of_evaluation Number_of_run Name_of_function**  
 
 -----
 
@@ -28,6 +24,7 @@ To **execute** the code
   - [Hill Climbing](#hill-climbing-2)
   - [Simulated Annealing](#simulated-annealing-3)
   - [Tabu Search](#tabu-search-4)
+- [Modified Commits](#modified-commits)
 - [Signature](#best)
 
 -----
@@ -92,11 +89,21 @@ and another one is only check the left or right position based on decimal.
 
 ### **Tabu Search (4)**  
 
-TS
+Trying to search a possible solution nearby the certain one which is better and not contained in the tabu list. TS will generate the tabu list to save some solutions at the beginning.
 
-- Pros :  
-- Cons :  
+- Pros : To avoid a place where has been visited.  
+- Cons : The size of the tabu list might be not enough.  
 - EX :
+
+  - The original tabu list is set to size 7.  
+  - The tabu list will record the space where has been visited and avoid these areas, so it has more chances to seach the new areas that have not been searched.
+
+-----
+
+### **Modified Commits**
+
+- 07/31/2021 The commit should be **"Fixed bugs. Formatted. The OOP concept"**.
+- [BACK TO the TOP](#fast-link)
   
 ### ***Best,***  
 

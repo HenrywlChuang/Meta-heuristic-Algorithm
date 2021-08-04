@@ -10,6 +10,7 @@
 #include <ES.h>
 #include <HC.h>
 #include <SA.h>
+#include <TS.h>
 #include <Gnuplot.h>
 #include <lib.h> 
 
@@ -23,6 +24,13 @@ int main(int argc, char** argv)
     int num_evaluation  = atoi(argv[3]);
     int num_run         = atoi(argv[4]);
     int name_function   = atoi(argv[5]);
+
+    if(name_function == 2 && (num_bit > 15))    
+    {
+        cout << "---ALERT---" << endl;
+        cout << "Num_bit is too long." << endl;
+        exit(0);
+    }
 
     clock_t begin = clock();
 
@@ -45,6 +53,11 @@ int main(int argc, char** argv)
     {   
         SA SA(name_algo, num_bit, num_evaluation, num_run, name_function);
         SA.main();
+    }
+    else if(name_algo == 4)
+    {   
+        TS TS(name_algo, num_bit, num_evaluation, num_run, name_function);
+        TS.main();
     }
     else if(name_algo == 10)
     {   

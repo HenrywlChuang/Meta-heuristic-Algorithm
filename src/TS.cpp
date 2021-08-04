@@ -1,23 +1,25 @@
-#include "HC.h"
+#include "TS.h"
 #include "lib.h"
 
 using namespace std;
 
-HC::HC(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function)
+TS::TS(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function)
         :
         Algo(name_algo, num_bit, num_evaluation, num_run, name_function)
 {
         srand(time(0));
 }
 
-void HC::main()
+void TS::main()
 {
     cout << "---------------------"                      << endl;
-    cout << "This is the Hill Climbing."                 << endl;
+    cout << "This is the Tabu Search."                   << endl;
     cout << "Algo : "               << name_algo         << endl;
     cout << "Bits : "               << num_bit           << endl;
     cout << "Evaluation : "         << num_evaluation    << endl;
-    way_method = "HC_rand"; // HC_rand or HC_left_right
+    way_method = "TS_rand"; // TS_rand or TS_left_right
+	length_tabulist = 20;   // set by user
+	tabulist_vec.resize(length_tabulist);
 
     average_best.assign(num_evaluation, 0);
     // start
@@ -32,38 +34,50 @@ void HC::main()
         global_best = current_fitness;
         // cout << "START FROM number of bit : " << current_fitness << endl;
 
-        // HC
-        int lastest_best = current_fitness;
+        // TS
+		int lastest_best = current_fitness;
         while(current_evaluation < num_evaluation)
         {
             v1i temp_solution_vec = solution_vec;
-            transition(temp_solution_vec);   // HC
+            transition(temp_solution_vec);
             evaluation(current_fitness, temp_solution_vec, name_function);
-            determination(current_fitness, lastest_best, temp_solution_vec, solution_vec);
-            
+            if((current_fitness > lastest_best) && (tabulist(temp_solution_vec)))	determination(current_fitness, lastest_best, temp_solution_vec, solution_vec);
+
             save_global_best(global_best, lastest_best);
-            average_best[current_evaluation] += global_best;
+			average_best[current_evaluation] += global_best;
             current_evaluation++;
+			tabulist_vec.erase(tabulist_vec.begin());
+			tabulist_vec.push_back(temp_solution_vec);
         }
         // write_best_file(way_method, global_best);
+		// see_solution_v2i_vec(tabulist_vec);
     }
 
     // write average into a file
     write_average_file(way_method, average_best, num_run);
-    cout << "---DONE HC.---" << endl;
+    cout << "---DONE TS.---" << endl;
 }
 
-void HC::transition(v1i& temp_solution_vec)
+bool TS::tabulist(const v1i& temp_solution_vec)	// check the current if in the tabulist
+{
+	for(int i = 0; i < (int)tabulist_vec.size(); i++)
+	{
+		if(tabulist_vec[i] == temp_solution_vec)	return false;
+	}
+	return true;
+}
+
+void TS::transition(v1i& temp_solution_vec)
 {
     // random method
-    if(!way_method.compare("HC_rand"))
+    if(!way_method.compare("TS_rand"))
     {
         int pick_random = rand() % num_bit;  // randomly pick a position to be changed
         if(temp_solution_vec[pick_random] == 0)   temp_solution_vec[pick_random] = 1;
         else temp_solution_vec[pick_random] = 0;
     }
     // left-right method
-    else if(!way_method.compare("HC_left_right"))
+    else if(!way_method.compare("TS_left_right"))
     {
         if(temp_solution_vec[temp_solution_vec.size() - 1] == 0)    temp_solution_vec[temp_solution_vec.size() - 1] = 1;
         else    temp_solution_vec[temp_solution_vec.size() - 1] = 0;

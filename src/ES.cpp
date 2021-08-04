@@ -27,7 +27,7 @@ void ES::main()
         int current_evaluation = 0;
         // initializtion
         initialization(solution_vec, num_bit);
-        // see_solution_vec(solution_vec);
+        // see_solution_v1i_vec(solution_vec);
         evaluation(current_fitness, solution_vec, name_algo);
         global_best = current_fitness;
         // cout << "START FROM number of bit : " << current_fitness << endl;
@@ -46,7 +46,7 @@ void ES::main()
             // {
             //     cout << "TIME'S UP." << endl;
             //     cout << "The current one." << endl;
-            //     see_solution_vec(solution_vec);
+            //     see_solution_v1i_vec(solution_vec);
             //     break;
             // }  
             average_best[current_evaluation] += global_best; 

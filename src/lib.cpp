@@ -8,10 +8,20 @@ Algo::Algo(int name_algo, int num_bit, int num_evaluation, int num_run, int name
 }
 
 // Function
-void see_solution_vec(const v1i& solution_vec)
+void see_solution_v1i_vec(const v1i& solution_vec)
 {
     for(int i = 0; i < (int)solution_vec.size(); i++)    cout << solution_vec[i];
     cout << endl;
+}
+
+void see_solution_v2i_vec(const v2i& solution_vec)
+{
+    cout << "Tabu list : " << endl;
+    for(int i = 0; i < (int)solution_vec.size(); i++)
+    {
+        for(int j = 0; j < (int)solution_vec[i].size(); j++)    cout << solution_vec[i][j];
+        cout << endl;
+    }
 }
 
 int binary_to_decimal(const v1i& temp_solution_vec)
@@ -19,7 +29,7 @@ int binary_to_decimal(const v1i& temp_solution_vec)
     int count = 0;  // decimal
     int solution_index = 0; // index of solution
     // cout << "---" << endl;
-    // see_solution_vec(temp_solution_vec);
+    // see_solution_v1i_vec(temp_solution_vec);
     for(int i = temp_solution_vec.size() - 1; i>= 0; i--)
     {
         count += temp_solution_vec[i] * pow(2, solution_index);
@@ -31,9 +41,13 @@ int binary_to_decimal(const v1i& temp_solution_vec)
 
 void evaluation(int& current_fitness, const v1i& temp_solution_vec, const int& name_algo)
 {
-    if(name_algo == 0)  evaluation_onemax(current_fitness, temp_solution_vec);
-    else if(name_algo == 1) evaluation_onemax(current_fitness, temp_solution_vec);
-    else    cout << "Please check the function." << endl;
+    if(name_algo == 1)  evaluation_onemax(current_fitness, temp_solution_vec);
+    else if(name_algo == 2) evaluation_decption(current_fitness, temp_solution_vec);
+    else
+    {
+        cout << "Please check the function." << endl;
+        exit(0);
+    }
 }
 
 void evaluation_onemax(int& current_fitness, const v1i& temp_solution_vec)
@@ -46,7 +60,7 @@ void evaluation_decption(int& current_fitness, const v1i& temp_solution_vec)
 {
     current_fitness = 0;
     current_fitness = fabs(binary_to_decimal(temp_solution_vec) - pow(2, (temp_solution_vec.size() - 2)));
-    // see_solution_vec(temp_solution_vec);
+    // see_solution_v1i_vec(temp_solution_vec);
     // cout << current_fitness << endl; // check current_fitness
 }
 
@@ -101,7 +115,7 @@ void determination(int& current_fitness, int& best_so_far, const v1i& temp_solut
 		best_so_far = current_fitness;
         solution_vec = temp_solution_vec;
 		// clock_t end = clock();
-		// see_solution_vec(solution_vec);
+		// see_solution_v1i_vec(solution_vec);
 		// searching_secs = double(end - begin) / CLOCKS_PER_SEC;
 		// cout << current_fitness << endl;
         // cout << "yooooooo----" << endl;
