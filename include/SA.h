@@ -14,7 +14,8 @@ class SA : public Algo
 		int num_bit,
 		int num_evaluation,
 		int num_run,
-		int function);
+		int function,
+		string way_method);
 	~SA() {}
 
 	void main();
@@ -23,6 +24,6 @@ class SA : public Algo
 	double initial_temperature;
 
   private: //functions
-	void transition(v1i &temp_solution_vec);
+	inline void transition(v1i &temp_solution_vec);
 };
 #endif

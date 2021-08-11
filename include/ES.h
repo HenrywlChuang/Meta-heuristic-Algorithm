@@ -18,6 +18,6 @@ class ES : public Algo
 
   private://functions
 
-	void transition();
+	inline void transition();
 };
 #endif

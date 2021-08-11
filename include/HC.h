@@ -14,7 +14,8 @@ class HC : public Algo
 		int num_bit,
 		int num_evaluation,
 		int num_run,
-		int name_function
+		int name_function,
+		string way_method
 	);
 	~HC() {}
 	
@@ -24,6 +25,6 @@ class HC : public Algo
 
   private://functions
 
-	void transition(v1i& temp_solution_vec);
+	inline void transition(v1i& temp_solution_vec);
 };
 #endif

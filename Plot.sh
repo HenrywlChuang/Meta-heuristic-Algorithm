@@ -1,5 +1,8 @@
 # Plotting figures
 # Execute this to plot figures
-./bin/main 10 0 0 0 0
-chmod 755 Gnuplot.sh
-./Gnuplot.sh
+for((function=1;function<3;function++))
+do
+    ./bin/main 10 ${function}
+    chmod 755 Gnuplot.sh
+    ./Gnuplot.sh
+done

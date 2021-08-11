@@ -25,7 +25,7 @@ void ES::main()
     {
         cout << "RUN : " << (i + 1) << endl;
         int current_evaluation = 0;
-        // initializtion
+        // initialization
         initialization(solution_vec, num_bit);
         // see_solution_v1i_vec(solution_vec);
         evaluation(current_fitness, solution_vec, name_algo);
@@ -60,11 +60,11 @@ void ES::main()
     }
 
     // write average into a file
-    write_average_file(way_method, average_best, num_run);
+    write_average_file(way_method, average_best, num_run, name_function);
     cout << "---DONE ES.---" << endl;
 }
 
-void ES::transition()
+inline void ES::transition()
 {
     for(int i = solution_vec.size() - 1; i >= 0; i--)
     {

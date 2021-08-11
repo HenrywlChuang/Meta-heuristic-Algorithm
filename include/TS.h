@@ -14,7 +14,8 @@ class TS : public Algo
 		int num_bit,
 		int num_evaluation,
 		int num_run,
-		int name_function
+		int name_function,
+		string way_method
 	);
 	~TS() {}
 	
@@ -27,7 +28,7 @@ class TS : public Algo
 
   private://functions
 
-	void transition(v1i& temp_solution_vec);
-	bool tabulist(const v1i& temp_solution_vec);
+	inline void transition(v1i& temp_solution_vec);
+	inline bool tabulist(const v1i& temp_solution_vec);
 };
 #endif

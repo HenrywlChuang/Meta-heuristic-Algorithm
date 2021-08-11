@@ -10,7 +10,8 @@ class Gnuplot
 {
   public:
 	Gnuplot(
-		int name_algo
+		int name_algo,
+		int name_function
 	);
 	~Gnuplot() {}
 	
@@ -19,6 +20,7 @@ class Gnuplot
   private://parameters
 
 	int name_algo;
+	int name_function;
 	string input_filename;
 
   private://functions

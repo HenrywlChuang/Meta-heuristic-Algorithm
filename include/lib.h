@@ -10,6 +10,8 @@
 #include <float.h>
 #include <algorithm>
 #include <time.h>
+#include <numeric>
+#include <dirent.h>
 
 using namespace std;
 
@@ -30,16 +32,20 @@ typedef vector<v1s> v2s    ;
 
 // global functions
 void see_solution_v1i_vec(const v1i& solution_vec);
+void see_solution_v1d_vec(const v1d& solution_vec);
 void see_solution_v2i_vec(const v2i& solution_vec);
-void evaluation_decption(int& current_fitness, const v1i& temp_solution_vec);
-void evaluation_onemax(int& current_fitness, const v1i& temp_solution_vec);
-void evaluation(int& current_fitness, const v1i& solution_vec, const int& name_algo);
-void write_best_file(const string& name_algo, const int& global_best);
+void evaluation_deception(double& current_fitness, const v1i& temp_solution_vec);
+void evaluation_onemax(double& current_fitness, const v1i& temp_solution_vec);
+void evaluation(double& current_fitness, const v1i& solution_vec, const int& name_algo);
+void evaluation_population(v1d& current_fitness_pop, const v2i& solution_vec_pop, const int& name_algo);
+void write_best_file(const string& name_algo, const double& global_best);
+void initialization_population(v2i& solution_vec_pop, const int& num_bit, const int& num_population);
 void initialization(v1i& solution_vec, const int& num_bit);
-void determination(int& current_fitness, int& lastest_fitness, const v1i& temp_solution_vec, v1i& solution_vec);
-void write_average_file(const string& name_algo, const v1d& average_best, const int& num_run);
-void save_global_best(int& global_best, int& lastest_best);
+void determination(double& current_fitness, double& latest_best, const v1i& temp_solution_vec, v1i& solution_vec);
+void write_average_file(const string& name_algo, const v1d& average_best, const int& num_run, const int& name_function);
+void save_global_best(double& global_best, double& latest_best);
 int binary_to_decimal(const v1i& temp_solution_vec);
+void local_best_population(const v1d& current_fitness_pop, double& global_best);
 
 // global class
 class Algo
@@ -55,8 +61,10 @@ class Algo
 	int name_function;
 
 	v1i solution_vec;
-	int current_fitness;  // how many one in the vector
-	int global_best;
+	v2i solution_vec_pop;	// save every solution into a vector
+	double current_fitness;  // how many one in the vector
+	v1d current_fitness_pop;	// save every current fitness into a vector
+	double global_best;
 	string way_method;
 	v1d average_best;
 

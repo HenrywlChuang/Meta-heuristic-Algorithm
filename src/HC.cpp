@@ -3,10 +3,11 @@
 
 using namespace std;
 
-HC::HC(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function)
+HC::HC(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function, string way_method)
         :
         Algo(name_algo, num_bit, num_evaluation, num_run, name_function)
 {
+        this->way_method = way_method;
         srand(time(0));
 }
 
@@ -17,7 +18,9 @@ void HC::main()
     cout << "Algo : "               << name_algo         << endl;
     cout << "Bits : "               << num_bit           << endl;
     cout << "Evaluation : "         << num_evaluation    << endl;
-    way_method = "HC_rand"; // HC_rand or HC_left_right
+    way_method = "HC" + way_method;
+    cout << way_method << endl;
+    // way_method = "HC_rand"; // HC_rand or HC_left_right
 
     average_best.assign(num_evaluation, 0);
     // start
@@ -33,15 +36,15 @@ void HC::main()
         // cout << "START FROM number of bit : " << current_fitness << endl;
 
         // HC
-        int lastest_best = current_fitness;
+        double latest_best = current_fitness;
         while(current_evaluation < num_evaluation)
         {
             v1i temp_solution_vec = solution_vec;
             transition(temp_solution_vec);   // HC
             evaluation(current_fitness, temp_solution_vec, name_function);
-            determination(current_fitness, lastest_best, temp_solution_vec, solution_vec);
+            determination(current_fitness, latest_best, temp_solution_vec, solution_vec);
             
-            save_global_best(global_best, lastest_best);
+            save_global_best(global_best, latest_best);
             average_best[current_evaluation] += global_best;
             current_evaluation++;
         }
@@ -49,11 +52,11 @@ void HC::main()
     }
 
     // write average into a file
-    write_average_file(way_method, average_best, num_run);
+    write_average_file(way_method, average_best, num_run, name_function);
     cout << "---DONE HC.---" << endl;
 }
 
-void HC::transition(v1i& temp_solution_vec)
+inline void HC::transition(v1i& temp_solution_vec)
 {
     // random method
     if(!way_method.compare("HC_rand"))

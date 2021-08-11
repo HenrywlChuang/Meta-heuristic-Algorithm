@@ -3,10 +3,11 @@
 
 using namespace std;
 
-SA::SA(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function)
+SA::SA(int name_algo, int num_bit, int num_evaluation, int num_run, int name_function, string way_method)
         :
         Algo(name_algo, num_bit, num_evaluation, num_run, name_function)
 {
+        this->way_method = way_method;
         srand(time(0));
 }
 
@@ -17,7 +18,8 @@ void SA::main()
     cout << "Algo : "               << name_algo            << endl;
     cout << "Bits : "               << num_bit              << endl;
     cout << "Evaluation : "         << num_evaluation       << endl;
-    way_method = "SA_rand"; // SA_rand or SA_left_right
+    way_method = "SA" + way_method;
+    // way_method = "SA_rand"; // SA_rand or SA_left_right
 
     /// set by self or from outside
     // cout << "Please input initial temperature"              << endl;
@@ -41,26 +43,26 @@ void SA::main()
         // cout << "START FROM number of bit : " << current_fitness << endl;
 
         // SA
-        int lastest_best = current_fitness;
+        double latest_best = current_fitness;
         while(current_evaluation < num_evaluation)
         {
             v1i temp_solution_vec = solution_vec;
             transition(temp_solution_vec); 
             evaluation(current_fitness, temp_solution_vec, name_function);
-            if(current_fitness > lastest_best) determination(current_fitness, lastest_best, temp_solution_vec, solution_vec);
-            else if(current_fitness == lastest_best) solution_vec = temp_solution_vec;
+            if(current_fitness > latest_best) determination(current_fitness, latest_best, temp_solution_vec, solution_vec);
+            else if(current_fitness == latest_best) solution_vec = temp_solution_vec;
             else
             {
                 double rand_annealing_rate = (double)rand() / (RAND_MAX + 1.0);
-                double anneal_energy = exp((current_fitness - lastest_best) / temperature_run);
+                double anneal_energy = exp((current_fitness - latest_best) / temperature_run);
                 if(anneal_energy > rand_annealing_rate)
                 {
-                    lastest_best = current_fitness;
+                    latest_best = current_fitness;
                     solution_vec = temp_solution_vec;
                 }
             }
 
-            save_global_best(global_best, lastest_best);
+            save_global_best(global_best, latest_best);
             average_best[current_evaluation] += global_best;
             current_evaluation++;
             // temperature_run = initial_temperature * (double)(num_evaluation - current_evaluation) / (double)num_evaluation;  // annealing
@@ -70,11 +72,11 @@ void SA::main()
     }
 
     // write average into a file
-    write_average_file(way_method, average_best, num_run);
+    write_average_file(way_method, average_best, num_run, name_function);
     cout << "---DONE SA Onemax.---" << endl;
 }
 
-void SA::transition(v1i& temp_solution_vec)
+inline void SA::transition(v1i& temp_solution_vec)
 {
     // random method
     if(!way_method.compare("SA_rand"))
