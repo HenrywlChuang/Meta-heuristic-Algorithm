@@ -10,7 +10,7 @@ Algo::Algo(int name_algo, int num_bit, int num_evaluation, int num_run, int name
 // Function
 void see_solution_v1i_vec(const v1i& solution_vec)
 {
-    for(int i = 0; i < (int)solution_vec.size(); i++)    cout << solution_vec[i];
+    for(int i = 0; i < (int)solution_vec.size(); i++)    cout << solution_vec[i] << " ";
     cout << endl;
 }
 
@@ -24,7 +24,16 @@ void see_solution_v2i_vec(const v2i& solution_vec)
 {
     for(int i = 0; i < (int)solution_vec.size(); i++)
     {
-        for(int j = 0; j < (int)solution_vec[i].size(); j++)    cout << solution_vec[i][j];
+        for(int j = 0; j < (int)solution_vec[i].size(); j++)    cout << solution_vec[i][j] << " ";
+        cout << endl;
+    }
+}
+
+void see_solution_v2d_vec(const v2d& solution_vec)
+{
+    for(int i = 0; i < (int)solution_vec.size(); i++)
+    {
+        for(int j = 0; j < (int)solution_vec[i].size(); j++)    cout << solution_vec[i][j] << " ";
         cout << endl;
     }
 }
@@ -48,6 +57,19 @@ void evaluation_population(v1d& current_fitness_pop, const v2i& solution_vec_pop
 {
     current_fitness_pop.resize(solution_vec_pop.size());
     for(int i = 0; i < (int)solution_vec_pop.size(); i++)    evaluation(current_fitness_pop[i], solution_vec_pop[i], name_algo);
+}
+
+void evaluation_TSP(v1d& current_fitness_pop, const v2i& solution_vec_pop, const v2d& map_distance)
+{
+    current_fitness_pop.resize(solution_vec_pop.size());
+    for(int i = 0; i < (int)solution_vec_pop.size(); i++)
+    {
+        double distance = 0;
+        for(int j = 1; j < (int)solution_vec_pop[i].size(); j++)    distance += map_distance[solution_vec_pop[i][j - 1]][solution_vec_pop[i][j]];
+        distance = distance + map_distance[solution_vec_pop[i][solution_vec_pop[i].size() - 1]][solution_vec_pop[i][0]];
+        // cout << distance << endl;
+        current_fitness_pop[i] = distance;
+    }
 }
 
 void evaluation(double& current_fitness, const v1i& temp_solution_vec, const int& name_algo)
@@ -106,6 +128,10 @@ void write_average_file(const string& name_algo, const v1d& average_best, const 
     {
         filename = "result/txt/deception/";
     }
+    else if(name_function == 3)
+    {
+        filename = "result/txt/tsp/";
+    }
     else
     {
         cout << "Please check the function." << endl;
@@ -138,6 +164,30 @@ void initialization(v1i& solution_vec, const int& num_bit)
     for(int i = 0; i < num_bit; i++)    solution_vec[i] = rand() % 2;		// initial by random
 }
 
+void initialization_population_TSP(v2i& solution_vec_pop, const int& num_population, const int& cities)
+{
+    solution_vec_pop.resize(num_population);
+    for(int i = 0; i < num_population; i++)
+    {
+        v1i temp_solution_vec;
+        v1b citiesHaveBeen;
+        citiesHaveBeen.resize(cities, false);
+        int cities_count = 0;
+        while(cities_count < cities)
+        {
+            int city_position = rand() % cities;
+            if(!citiesHaveBeen[city_position])
+            {
+                temp_solution_vec.push_back(city_position);
+                citiesHaveBeen[city_position] = true;
+                cities_count++;
+            }
+        }
+        solution_vec_pop[i] = temp_solution_vec;
+        temp_solution_vec.clear();
+    }
+}
+
 void determination(double& current_fitness, double& best_so_far, const v1i& temp_solution_vec, v1i& solution_vec)
 {
     // compare
@@ -159,7 +209,21 @@ void save_global_best(double& global_best, double& latest_best)
     if(latest_best >= global_best) global_best = latest_best;
 }
 
-void local_best_population(const v1d& current_fitness_pop, double& local_best)
+void save_global_best_TSP(double& global_best, double& latest_best, v1i& global_best_route, v1i& local_best_route) // check if the latest is shorter
+{
+    if(global_best >= latest_best)
+    {
+        global_best = latest_best;
+        global_best_route = local_best_route;
+    } 
+}
+
+void local_best_population(const v1d& current_fitness_pop, double& local_best)  // find the best in this iteration
 {
     local_best = *max_element(current_fitness_pop.begin(), current_fitness_pop.end());
+}
+
+void local_best_TSP(const v1d& current_fitness_pop, double& local_best)  // find the shortest route in this iteration
+{
+    local_best = *min_element(current_fitness_pop.begin(), current_fitness_pop.end());
 }

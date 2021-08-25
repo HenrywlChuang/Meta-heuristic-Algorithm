@@ -19,12 +19,14 @@ To **execute** the code
 - [Problems](#problems)
   - [One-max](#one-max-problem)
   - [Deception](#deception-problem)
+  - [Traveling Salesman Problem](#traveling-salesman-problem)
 - [Algorithms](#algorithms)
   - [Exhaustive Search](#exhaustive-search-1)
   - [Hill Climbing](#hill-climbing-2)
   - [Simulated Annealing](#simulated-annealing-3)
   - [Tabu Search](#tabu-search-4)
   - [Genetic Algorithm](#genetic-algorithm-5)
+  - [Ant Colony Optimization](#ant-colony-optimization-6)
 - [Modified Commits](#modified-commits)
 - [Signature](#best)
 
@@ -44,6 +46,13 @@ To **execute** the code
 - Def : A function which is defined as **$f(x_{bin}) = |x_{dec} - 2 ^ {(n - 2)}|$**  
 The $x$ means a vector that has been input. The $x_{bin}$ means $x$ using binary to show. The $x_{dec}$ means $x$ using decimal to show. The $n$ means the length of $x_{bin}$.  
 - Goal : The goal is making the function result as huge as possible.
+
+-----
+
+### **Traveling Salesman Problem**
+
+- Def : There are some cities which are allocated on a map. A salesman wants to find an efficient way to travel.
+- Goal : The goal is trying to find a route which is the shortest.
 
 -----
 
@@ -112,6 +121,20 @@ Genetic Algorithm is called GA. It simulates the process of evolution. Each solu
   - Roulette selection is referring to the fitness of each solution. Every solution has own proportion based on its fitness value.
   - Tournament selection is to randomly pick two solution, and compete the fitness of each other. Keep the better one into next generation.
   - Crossover can be implemented by many ways. The one-point crossover has been used here.
+
+-----
+
+### **Ant Colony Optimization (6)**  
+
+Ant colony Optimization is called ACO. It mimics the behaviors of ants. When ants pass somewhere, they put the pheromones on a route. The rest of ants will follow a strong odor way. Basically, when a route has been visited many times, the odor will be stronger. Finally, many ants will follow this strong pheromones route.
+
+- Pros : The best route can be found.
+- Cons : Loading is heavy, and parameters are sensitive.
+- EX :
+
+  - An ant will choose a promising city depending on selecting strong pheromones equation. The paper can be found by Dorigo in 1997.
+  - The pheromones table will be updated after local search and global search.
+  - The best route will significantly add strong pheromones on the map.
 
 -----
 

@@ -24,6 +24,7 @@ class Gnuplot
 	string input_filename;
 
   private://functions
+	void plot_map();
 
 };
 #endif

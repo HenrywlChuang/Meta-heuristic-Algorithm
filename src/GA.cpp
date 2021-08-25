@@ -55,7 +55,7 @@ void GA::main()
             local_best_population(current_fitness_pop, local_best);
             save_global_best(global_best, local_best);
             for(int k = current_evaluation; k < (current_evaluation + num_population); k++)    average_best[k] += global_best;
-            current_evaluation+= num_population;
+            current_evaluation += num_population;
         }
         // write_best_file(way_method, global_best);
     }

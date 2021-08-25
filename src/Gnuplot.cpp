@@ -27,8 +27,9 @@ void Gnuplot::main()
     {
         // cout << "Opened file." << endl;
         file << "main=gnuplot"                 << endl;
-        file << "filename=" + input_filename   << endl;;
+        file << "filename=" + input_filename   << endl;
         file << "$main result/gp/$filename.gp" << endl;
+        if(name_function == 3)  file << "$main result/gp/ACO_route.gp" << endl;
     }
     file.close(); 
     string gp_filename = "result/gp/" + input_filename + ".gp";    // for gp file
@@ -64,6 +65,12 @@ void Gnuplot::main()
         name_function_string = "deception/";
         PATH = "./result/txt/" + name_function_string;
     }
+    else if(name_function == 3)
+    {
+        name_function_string = "tsp/";
+        PATH = "./result/txt/" + name_function_string;
+        plot_map();
+    }
     else
     {
         cout << "Please check the function." << endl;
@@ -95,4 +102,29 @@ void Gnuplot::main()
     closedir(dir); 
     file.close();
     cout << "DONE Plotting." << endl;
+}
+
+void Gnuplot::plot_map()
+{
+    fstream file;
+    string gp_filename = "result/gp/ACO_route.gp";    // for gp file
+    file.open(gp_filename,  ios::out | ios::trunc);    // ios::app // open the existed one, not remove it    // ios::trunc   // remove the same name file, rewrite it again
+    if(!file)
+    {
+        cout << "Cannot open file." << endl;
+    }
+    else
+    {
+        // cout << "Opened file." << endl;
+        file << "reset" << endl;
+        file << "set output '";
+        file << "result/graph/ACORoute.png'" << endl;
+        file << "set xlabel \"X\"" << endl;
+        file << "set ylabel \"Y\"" << endl;
+        file << "set title \"TSP\"" << endl;
+        file << "set grid" << endl;
+        file << "set term png enhanced font 'Verdana,10'" << endl;
+        file << "plot [0:70][0:70] 'result/txt/tsp/ACO_route.txt' title \"TSPRoute\" with linespoints" << endl;
+    } 
+    file.close();
 }
