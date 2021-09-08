@@ -53,10 +53,16 @@ int binary_to_decimal(const v1i& temp_solution_vec)
     return count;
 }
 
-void evaluation_population(v1d& current_fitness_pop, const v2i& solution_vec_pop, const int& name_algo)
+void evaluation_population(v1d& current_fitness_pop, const v2i& solution_vec_pop, const int& name_function)
 {
     current_fitness_pop.resize(solution_vec_pop.size());
-    for(int i = 0; i < (int)solution_vec_pop.size(); i++)    evaluation(current_fitness_pop[i], solution_vec_pop[i], name_algo);
+    for(int i = 0; i < (int)solution_vec_pop.size(); i++)    evaluation(current_fitness_pop[i], solution_vec_pop[i], name_function);
+}
+
+void evaluation_population_d(v1d& current_fitness_pop, const v2d& solution_vec_pop, const int& name_function)
+{
+    current_fitness_pop.resize(solution_vec_pop.size());
+    for(int i = 0; i < (int)solution_vec_pop.size(); i++)    evaluation_d(current_fitness_pop[i], solution_vec_pop[i], name_function);
 }
 
 void evaluation_TSP(v1d& current_fitness_pop, const v2i& solution_vec_pop, const v2d& map_distance)
@@ -72,10 +78,20 @@ void evaluation_TSP(v1d& current_fitness_pop, const v2i& solution_vec_pop, const
     }
 }
 
-void evaluation(double& current_fitness, const v1i& temp_solution_vec, const int& name_algo)
+void evaluation(double& current_fitness, const v1i& temp_solution_vec, const int& name_function)
 {
-    if(name_algo == 1)  evaluation_onemax(current_fitness, temp_solution_vec);
-    else if(name_algo == 2) evaluation_deception(current_fitness, temp_solution_vec);
+    if(name_function == 1)  evaluation_onemax(current_fitness, temp_solution_vec);
+    else if(name_function == 2) evaluation_deception(current_fitness, temp_solution_vec);
+    else
+    {
+        cout << "Please check the function." << endl;
+        exit(0);
+    }
+}
+
+void evaluation_d(double& current_fitness, const v1d& temp_solution_vec, const int& name_function)
+{
+    if(name_function == 4)  evaluation_ackley(current_fitness, temp_solution_vec);
     else
     {
         cout << "Please check the function." << endl;
@@ -96,6 +112,26 @@ void evaluation_deception(double& current_fitness, const v1i& temp_solution_vec)
     current_fitness = fabs(binary_to_decimal(temp_solution_vec) - pow(2, (temp_solution_vec.size() - 2)));
     // see_solution_v1i_vec(temp_solution_vec);
     // cout << current_fitness << endl; // check current_fitness
+}
+
+void evaluation_ackley(double& current_fitness, const v1d& temp_solution_vec)
+{
+    double result    = 0;
+    double sig_x     = 0;
+    double sig_cos_x = 0;
+    for(int i = 0; i < (int)temp_solution_vec.size(); i++)
+    {
+        sig_x = sig_x + pow(temp_solution_vec[i], 2);
+        sig_cos_x = sig_cos_x + cos(2 * M_PI * temp_solution_vec[i]);
+    }
+    // cout << i << ": " << endl;
+    // cout << "Sig_x : " << sig_x << endl;
+    // cout << "Sig_cos_x : " << sig_cos_x << endl;
+    result = -20.0 * exp(-0.2 * sqrt((1.0 / (double)temp_solution_vec.size()) * sig_x))
+                   - exp((1.0 / (double)temp_solution_vec.size()) * sig_cos_x)
+                   + exp(1.0) + 20.0;
+    // cout << "Result : " << result << endl;
+    current_fitness = result;
 }
 
 void write_best_file(const string& name_algo, const double& global_best)
@@ -131,6 +167,10 @@ void write_average_file(const string& name_algo, const v1d& average_best, const 
     else if(name_function == 3)
     {
         filename = "result/txt/tsp/";
+    }
+    else if(name_function == 4)
+    {
+        filename = "result/txt/ackley/";
     }
     else
     {
@@ -209,6 +249,11 @@ void save_global_best(double& global_best, double& latest_best)
     if(latest_best >= global_best) global_best = latest_best;
 }
 
+void save_global_best_smallest(double& global_best, double& latest_best)
+{
+    if(global_best >= latest_best) global_best = latest_best;
+}
+
 void save_global_best_TSP(double& global_best, double& latest_best, v1i& global_best_route, v1i& local_best_route) // check if the latest is shorter
 {
     if(global_best >= latest_best)
@@ -218,12 +263,21 @@ void save_global_best_TSP(double& global_best, double& latest_best, v1i& global_
     } 
 }
 
-void local_best_population(const v1d& current_fitness_pop, double& local_best)  // find the best in this iteration
+void local_best_largest(const v1d& current_fitness_pop, double& local_best)  // find the best in this iteration
 {
     local_best = *max_element(current_fitness_pop.begin(), current_fitness_pop.end());
 }
 
-void local_best_TSP(const v1d& current_fitness_pop, double& local_best)  // find the shortest route in this iteration
+void local_best_smallest(const v1d& current_fitness_pop, double& local_best)  // find the shortest route in this iteration
 {
     local_best = *min_element(current_fitness_pop.begin(), current_fitness_pop.end());
+}
+
+void set_boundary(double& upper_bound, double& lower_bound, const int& name_function)
+{
+    if(name_function == 4)  // Ackley
+    {
+        upper_bound = 32.0;
+        lower_bound = -32.0;
+    }
 }

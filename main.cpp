@@ -13,6 +13,7 @@
 #include <TS.h>
 #include <GA.h>
 #include <ACO.h>
+#include <PSO.h>
 #include <Gnuplot.h>
 #include <lib.h> 
 
@@ -166,6 +167,16 @@ int main(int argc, char** argv)
         string dataset     = argv[11];
         ACO ACO(name_algo, num_bit, num_evaluation, num_run, name_function, num_population, alpha, beta, rho, q, dataset);
         ACO.main();
+    }
+    else if(name_algo == 7)
+    {   
+        int num_population = atoi(argv[6]);
+        double w           = atof(argv[7]);
+        double c1          = atof(argv[8]);
+        double c2          = atof(argv[9]);
+        int dimension      = atof(argv[10]);
+        PSO PSO(name_algo, num_bit, num_evaluation, num_run, name_function, num_population, w, c1, c2, dimension);
+        PSO.main();
     }
     else if(name_algo == 10)
     {   

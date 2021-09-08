@@ -3,11 +3,11 @@
 # Before running the program, plz do "make cleanall".
 make
 
-algos=1         #test(0) Exhaustive Search(1) Hill Climbing(2) Simulated Annealing(3) Tabu Search (4) Genetic Algo (5) Ant Colony Optimization (6) Plotting (10)
+algos=1         #test(0) Exhaustive Search(1) Hill Climbing(2) Simulated Annealing(3) Tabu Search (4) Genetic Algo (5) Ant Colony Optimization (6) Particle Swarm Optimization (7) Plotting (10)
 bit=100
-evaluation=20000
+evaluation=100000
 run=51
-function=3                      #Onemax (1) Deception (2) TSP (3)
+function=4                      #Onemax (1) Deception (2) TSP (3) Ackley (4)
 waymethod=_rand                 #_rand _left_right
 wayselection=_roulette          #_roulette _tournament
 waycrossover=_onepoint         #_onepoint
@@ -23,6 +23,10 @@ rho=0.1
 q=0.9
 dataset=eil51.txt
 RUN=./bin/main
+w=0.5
+c1=2
+c2=2
+dimension=30
 
 # ES
 # $RUN 1 $bit $evaluation $run $function
@@ -34,7 +38,10 @@ RUN=./bin/main
 # $RUN 5 $bit $evaluation $run $function $population $wayselection $waycrossover $crossover_rate $mutation_rate
 
 # ACO
-$RUN 6 $bit $evaluation $run $function $population $alpha $beta $rho $q $dataset
+# $RUN 6 $bit $evaluation $run $function $population $alpha $beta $rho $q $dataset
+
+# PSO
+$RUN 7 $bit $evaluation $run $function $population $w $c1 $c2 $dimension
 
 # # LOOP
 # for((function=1;function<3;function++))

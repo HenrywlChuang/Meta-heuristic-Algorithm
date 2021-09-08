@@ -8,6 +8,6 @@
 #     ./Gnuplot.sh
 # done
 # one time
-./bin/main 10 3
+./bin/main 10 4
 chmod 755 Gnuplot.sh
 ./Gnuplot.sh

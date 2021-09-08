@@ -126,7 +126,7 @@ Genetic Algorithm is called GA. It simulates the process of evolution. Each solu
 
 ### **Ant Colony Optimization (6)**  
 
-Ant colony Optimization is called ACO. It mimics the behaviors of ants. When ants pass somewhere, they put the pheromones on a route. The rest of ants will follow a strong odor way. Basically, when a route has been visited many times, the odor will be stronger. Finally, many ants will follow this strong pheromones route.
+Ant colony Optimization is called ACO. It mimics the behaviors of ants. When ants pass somewhere, they put the **pheromones** on a route. The rest of ants will follow strong odor. Basically, when a route has been visited many times, the odor will be stronger. Finally, many ants will follow this strong pheromones route. The **steps** is **choosing** a city, update **pheromones in local**, and **update pheromones in global**.
 
 - Pros : The best route can be found.
 - Cons : Loading is heavy, and parameters are sensitive.
@@ -136,6 +136,18 @@ Ant colony Optimization is called ACO. It mimics the behaviors of ants. When ant
   - The pheromones table will be updated after local search and global search.
   - The best route will significantly add strong pheromones on the map.
 
+-----
+
+### **Particle Swarm Optimization (7)**  
+
+Particle Swarm Optimization is called PSO. It mimics the behaviors of birds. Birds will gather together. The transition is referring to **the best particle** and **the best history of each particle**.
+
+- Pros : Having strong power.
+- Cons : A little bit hard to find the exact solution.
+- EX :
+
+  - It uses velocity, the best of each particle in history, and the global best.
+  
 -----
 
 ### **Modified Commits**

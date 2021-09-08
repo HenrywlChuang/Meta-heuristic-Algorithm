@@ -41,7 +41,7 @@ void ACO::main()
         initialization_population_TSP(solution_vec_pop, num_population, coordinate.size());
         evaluation_TSP(current_fitness_pop, solution_vec_pop, map_distance);
         // see_solution_v2i_vec(solution_vec_pop);
-        local_best_TSP(current_fitness_pop, local_best);
+        local_best_smallest(current_fitness_pop, local_best);
         f_local_best_route();
         global_best_route = local_best_route;
         global_best = local_best;
@@ -60,16 +60,16 @@ void ACO::main()
 
             // record information
             evaluation_TSP(current_fitness_pop, solution_vec_pop, map_distance);
-            local_best_TSP(current_fitness_pop, local_best);
+            local_best_smallest(current_fitness_pop, local_best);
             f_local_best_route();
             save_global_best_TSP(global_best, local_best, global_best_route, local_best_route);
-            save_global_best_TSP(real_global_best, global_best, real_global_best_vector, global_best_route);
             for(int k = current_evaluation; k < (current_evaluation + num_population); k++)    average_best[k] += global_best;
             current_evaluation += num_population;
 
             // ACO
             update_global_pheromones();
         }
+        save_global_best_TSP(real_global_best, global_best, real_global_best_vector, global_best_route);    // for all runs
         cout << "Best : " << global_best << endl;
         // see_solution_v1i_vec(global_best_route);
         // write_best_file(way_method, global_best);

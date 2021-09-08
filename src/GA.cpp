@@ -36,7 +36,7 @@ void GA::main()
         initialization_population(solution_vec_pop, num_bit, num_population);
         evaluation_population(current_fitness_pop, solution_vec_pop, name_function);
         // see_solution_v2i_vec(solution_vec_pop);
-        local_best_population(current_fitness_pop, local_best);
+        local_best_largest(current_fitness_pop, local_best);
         global_best = local_best;
         // cout << local_best << endl;
 
@@ -52,7 +52,7 @@ void GA::main()
             }
             
             evaluation_population(current_fitness_pop, solution_vec_pop, name_function);
-            local_best_population(current_fitness_pop, local_best);
+            local_best_largest(current_fitness_pop, local_best);
             save_global_best(global_best, local_best);
             for(int k = current_evaluation; k < (current_evaluation + num_population); k++)    average_best[k] += global_best;
             current_evaluation += num_population;

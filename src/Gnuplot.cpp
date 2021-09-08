@@ -71,6 +71,11 @@ void Gnuplot::main()
         PATH = "./result/txt/" + name_function_string;
         plot_map();
     }
+    else if(name_function == 4)
+    {
+        name_function_string = "ackley/";
+        PATH = "./result/txt/" + name_function_string;
+    }
     else
     {
         cout << "Please check the function." << endl;

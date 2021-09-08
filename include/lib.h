@@ -38,8 +38,11 @@ void see_solution_v2d_vec(const v2d& solution_vec);
 void evaluation_TSP(v1d& current_fitness_pop, const v2i& solution_vec_pop, const v2d& map_distance);
 void evaluation_deception(double& current_fitness, const v1i& temp_solution_vec);
 void evaluation_onemax(double& current_fitness, const v1i& temp_solution_vec);
-void evaluation(double& current_fitness, const v1i& solution_vec, const int& name_algo);
-void evaluation_population(v1d& current_fitness_pop, const v2i& solution_vec_pop, const int& name_algo);
+void evaluation_ackley(double& current_fitness, const v1d& temp_solution_vec);
+void evaluation(double& current_fitness, const v1i& solution_vec, const int& name_function);
+void evaluation_d(double& current_fitness, const v1d& temp_solution_vec, const int& name_function);
+void evaluation_population(v1d& current_fitness_pop, const v2i& solution_vec_pop, const int& name_function);
+void evaluation_population_d(v1d& current_fitness_pop, const v2d& solution_vec_pop, const int& name_function);
 void write_best_file(const string& name_algo, const double& global_best);
 void initialization_population(v2i& solution_vec_pop, const int& num_bit, const int& num_population);
 void initialization_population_TSP(v2i& solution_vec_pop, const int& num_population, const int& cities);
@@ -47,10 +50,12 @@ void initialization(v1i& solution_vec, const int& num_bit);
 void determination(double& current_fitness, double& latest_best, const v1i& temp_solution_vec, v1i& solution_vec);
 void write_average_file(const string& name_algo, const v1d& average_best, const int& num_run, const int& name_function);
 void save_global_best(double& global_best, double& latest_best);
+void save_global_best_smallest(double& global_best, double& latest_best);
 void save_global_best_TSP(double& global_best, double& latest_best, v1i& global_best_route, v1i& local_best_route);
 int binary_to_decimal(const v1i& temp_solution_vec);
-void local_best_population(const v1d& current_fitness_pop, double& global_best);
-void local_best_TSP(const v1d& current_fitness_pop, double& global_best);
+void local_best_largest(const v1d& current_fitness_pop, double& global_best);
+void local_best_smallest(const v1d& current_fitness_pop, double& global_best);
+void set_boundary(double& upper_bound, double& lower_bound, const int& name_function);
 
 // global class
 class Algo
@@ -67,6 +72,7 @@ class Algo
 
 	v1i solution_vec;
 	v2i solution_vec_pop;	// save every solution into a vector
+	v2d solution_vec_pop_d;
 	double current_fitness;  // how many one in the vector
 	v1d current_fitness_pop;	// save every current fitness into a vector
 	double global_best;
